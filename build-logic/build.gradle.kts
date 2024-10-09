@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `kotlin-dsl`
@@ -16,7 +17,8 @@ kotlin {
 }
 
 dependencies {
-
+    compileOnly(libs.android.gradlePlugin)
+    compileOnly(libs.kotlin.gradlePlugin)
 }
 
 tasks {
@@ -27,5 +29,10 @@ tasks {
 }
 
 gradlePlugin {
-
+    plugins {
+        register("androidApplicationCompose") {
+            id = "sdbk.application.compose"
+            implementationClass = "kr.sdbk.buildlogic.ApplicationComposeConvention"
+        }
+    }
 }
