@@ -34,5 +34,10 @@ gradlePlugin {
             id = "sdbk.application.compose"
             implementationClass = "kr.sdbk.buildlogic.ApplicationComposeConvention"
         }
+
+        register("androidLibraryCompose") {
+            id = "sdbk.library.compose"
+            implementationClass = "kr.sdbk.buildlogic.LibraryComposeConvention"
+        }
     }
 }

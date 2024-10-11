@@ -43,7 +43,7 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 
 #Build logic plugins
 sdbk-application-compose = { id = "sdbk.application.compose", version = "unspecified" }
-test-convention = { id = "test.convention" }
+sdbk-livrary-compose = { id = "sdbk.library.compose", version = "unspecified" }
 
 [bundles]
 compose = ["compose-ui", "compose-ui-graphics", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-material3", "compose-activity", "compose-navigation"]
