@@ -1,9 +1,9 @@
 plugins {
-    alias(libs.plugins.sdbk.library.compose)
+    alias(libs.plugins.sdbk.feature)
 }
 
 android {
-    namespace = "kr.sdbk.data"
+    namespace = "kr.sdbk.splash"
 
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")

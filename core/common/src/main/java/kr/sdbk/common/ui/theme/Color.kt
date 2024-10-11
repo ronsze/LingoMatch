@@ -1,4 +1,4 @@
-package kr.sdbk.lingomatch.ui.theme
+package kr.sdbk.common.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
