@@ -1,9 +1,16 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.sdbk.application.compose)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
     namespace = "kr.sdbk.lingomatch"
+
+    val secretProperties = Properties().apply {
+        load(rootProject.file("secrets.properties").inputStream())
+    }
 
     defaultConfig {
         applicationId = "kr.sdbk.lingomatch"
@@ -17,8 +24,27 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = secretProperties.getProperty("KEY_ALIAS")
+            keyPassword = secretProperties.getProperty("KEY_PASSWORD")
+            storeFile = file(secretProperties.getProperty("STORE_FILE"))
+            storePassword = secretProperties.getProperty("STORE_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("release")
+        }
+
+        debug {
+            isDebuggable = true
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -28,7 +54,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "11"
     }
 
     packaging {
@@ -44,4 +70,6 @@ dependencies {
     implementation(projects.core.domain)
 
     implementation(projects.feature.splash)
+    implementation(projects.feature.sign)
+    implementation(projects.feature.main)
 }
