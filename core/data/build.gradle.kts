@@ -1,5 +1,6 @@
 plugins {
-    alias(libs.plugins.sdbk.library.compose)
+    alias(libs.plugins.sdbk.library)
+    alias(libs.plugins.sdbk.hilt)
 }
 
 android {
@@ -8,4 +9,11 @@ android {
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }
+}
+
+dependencies {
+    implementation(projects.core.domain)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 }

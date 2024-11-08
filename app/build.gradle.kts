@@ -2,6 +2,7 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.sdbk.application.compose)
+    alias(libs.plugins.sdbk.hilt)
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
@@ -54,7 +55,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 
     packaging {

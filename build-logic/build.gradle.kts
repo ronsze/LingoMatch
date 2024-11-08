@@ -6,13 +6,13 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 kotlin {
     compilerOptions {
-        jvmTarget = JvmTarget.JVM_11
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 
@@ -40,9 +40,19 @@ gradlePlugin {
             implementationClass = "kr.sdbk.buildlogic.LibraryComposeConvention"
         }
 
+        register("library") {
+            id = "sdbk.library"
+            implementationClass = "kr.sdbk.buildlogic.LibraryConvention"
+        }
+
         register("featureConvention") {
             id = "sdbk.feature"
             implementationClass = "kr.sdbk.buildlogic.FeatureConvention"
+        }
+
+        register("hiltConvention") {
+            id = "sdbk.hilt"
+            implementationClass = "kr.sdbk.buildlogic.HiltConvention"
         }
     }
 }

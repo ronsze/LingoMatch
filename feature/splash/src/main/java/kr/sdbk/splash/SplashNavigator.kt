@@ -4,11 +4,14 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import kotlinx.serialization.Serializable
 
-fun NavGraphBuilder.splashGraph() {
+fun NavGraphBuilder.splashGraph(
+    navigateToOnboarding: () -> Unit,
+    navigateToHome: () -> Unit
+) {
     composable<Splash> {
         SplashView(
-            navigateToOnboarding = {},
-            navigateToHome = {}
+            navigateToOnboarding = navigateToOnboarding,
+            navigateToHome = navigateToHome
         )
     }
 }

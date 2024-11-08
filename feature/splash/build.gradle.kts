@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.sdbk.feature)
+    alias(libs.plugins.sdbk.hilt)
 }
 
 android {
@@ -8,4 +9,8 @@ android {
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }
+}
+
+dependencies {
+    implementation(libs.hilt.compose)
 }
