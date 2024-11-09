@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kr.sdbk.common.ui.composable.BaseText
+import kr.sdbk.common.ui.composable.BasicButton
 import kr.sdbk.common.ui.theme.SkyBlue
 import kr.sdbk.sign.R
 
@@ -36,47 +37,15 @@ fun OnboardingView(
     ) {
         Spacer(modifier = Modifier.weight(1f))
 
-        NavigateButton(text = R.string.sign_up) {
+        BasicButton(text = stringResource(id = R.string.sign_up)) {
             
         }
         Spacer(modifier = Modifier.height(20.dp))
 
-        NavigateButton(text = R.string.sign_in) {
+        BasicButton(text = stringResource(id = R.string.sign_in)) {
             
         }
         Spacer(modifier = Modifier.height(20.dp))
-    }
-}
-
-@Composable
-private fun NavigateButton(
-    @StringRes text: Int,
-    onClick: () -> Unit
-) {
-    Button(
-        shape = RoundedCornerShape(25.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = SkyBlue
-        ),
-        onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(55.dp)
-    ) {
-        BaseText(
-            text = stringResource(id = text),
-            fontSize = 18.sp,
-            color = Color.White,
-            fontWeight = FontWeight.Medium
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun ButtonPreview() {
-    NavigateButton(text = R.string.sign_in) {
-        
     }
 }
 

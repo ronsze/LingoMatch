@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.sdbk.application.compose)
     alias(libs.plugins.sdbk.hilt)
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    alias(libs.plugins.google.gms)
 }
 
 android {
@@ -73,4 +74,7 @@ dependencies {
     implementation(projects.feature.splash)
     implementation(projects.feature.sign)
     implementation(projects.feature.main)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 }

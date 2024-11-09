@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.sdbk.library)
     alias(libs.plugins.sdbk.hilt)
+    alias(libs.plugins.google.gms)
 }
 
 android {

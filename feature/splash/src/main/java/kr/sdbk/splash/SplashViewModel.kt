@@ -1,5 +1,6 @@
 package kr.sdbk.splash
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,6 +23,7 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             getUserUseCase()
                 .catch {
+                    Log.e("qweqwe", "${it}")
                     _uiState.emit(SplashUiState.Failed)
                 }
                 .collect { user ->
@@ -42,27 +44,4 @@ class SplashViewModel @Inject constructor(
         data object NavigateOnboarding: SplashUiState
         data object Failed: SplashUiState
     }
-}
-
-fun MathChallenge(num: Int): Int {
-    var count: Int = 0
-    var res: Int = num
-
-    while (res != 6174) {
-        val addedNumber = res.toString().padEnd(4, '0').toCharArray()
-        addedNumber
-        val ascending = addedNumber.sorted()
-        val descending = ascending.reversed()
-
-        res = descending.toString().toInt() - ascending.toString().toInt()
-
-        count++
-    }
-
-    return count
-
-}
-
-fun main() {
-    println(MathChallenge(readLine()))
 }

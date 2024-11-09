@@ -8,4 +8,11 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
 
 ) : BaseViewModel() {
+    fun signUp(
+        email: String,
+        password: String,
+        confirmPassword: String
+    ) {
+
+    }
 }

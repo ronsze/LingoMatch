@@ -2,4 +2,10 @@
 <resources>
     <string name="sign_up">SignUp</string>
     <string name="sign_in">SignIn</string>
+
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm password</string>
+
+    <string name="confirm">confirm</string>
 </resources>
