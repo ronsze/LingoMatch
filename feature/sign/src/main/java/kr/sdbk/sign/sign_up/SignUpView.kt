@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,18 +21,24 @@ import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kr.sdbk.common.ui.composable.BaseText
 import kr.sdbk.common.ui.composable.BasicButton
+import kr.sdbk.domain.model.user_service.User
 import kr.sdbk.sign.R
+import kr.sdbk.sign.sign_in.SignInViewModel
 
 @Composable
 fun SignUpView(
+    navigateToMain: (User) -> Unit,
     viewModel: SignUpViewModel = hiltViewModel()
 ) {
     Column(
         modifier = Modifier
             .padding(20.dp)
     ) {
+        val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+
         var email: String by remember { mutableStateOf("") }
         var password: String by remember { mutableStateOf("") }
         var confirmPassword: String by remember { mutableStateOf("") }
@@ -79,5 +86,11 @@ fun SignUpView(
             viewModel.signUp(email, password, confirmPassword)
         }
         Spacer(modifier = Modifier.height(20.dp))
+
+        LaunchedEffect(key1 = uiState) {
+            if (uiState is SignUpViewModel.SignUpUiState.Signed) {
+                navigateToMain(uiState.user)
+            }
+        }
     }
 }

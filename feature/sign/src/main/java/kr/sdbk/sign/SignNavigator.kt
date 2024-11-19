@@ -4,11 +4,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import kotlinx.serialization.Serializable
+import kr.sdbk.domain.model.user_service.User
 import kr.sdbk.sign.onboarding.OnboardingView
 import kr.sdbk.sign.sign_in.SignInView
 import kr.sdbk.sign.sign_up.SignUpView
 
 fun NavGraphBuilder.signGraph(
+    navigateToMain: (User) -> Unit,
     navController: NavController
 ) {
     composable<Onboarding> {
@@ -19,11 +21,15 @@ fun NavGraphBuilder.signGraph(
     }
 
     composable<SignUp> {
-        SignUpView()
+        SignUpView(
+            navigateToMain = navigateToMain
+        )
     }
 
     composable<SignIn> {
-        SignInView()
+        SignInView(
+            navigateToMain = navigateToMain
+        )
     }
 }
 

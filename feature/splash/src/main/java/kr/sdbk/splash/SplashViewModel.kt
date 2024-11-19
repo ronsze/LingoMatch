@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import kr.sdbk.common.base.BaseViewModel
-import kr.sdbk.common.base.TextDialogState
+import kr.sdbk.domain.model.user_service.User
 import kr.sdbk.domain.usecase.user_service.GetUserUseCase
 import javax.inject.Inject
 
@@ -28,19 +28,19 @@ class SplashViewModel @Inject constructor(
                 }
                 .collect { user ->
                     user?.run {
-                        loadData()
+                        loadData(this)
                     } ?: _uiState.emit(SplashUiState.NavigateOnboarding)
                 }
         }
     }
 
-    private fun loadData() {
-        _uiState.set(SplashUiState.NavigateHome)
+    private fun loadData(user: User) {
+        _uiState.set(SplashUiState.NavigateHome(user))
     }
 
     sealed interface SplashUiState {
         data object Loading: SplashUiState
-        data object NavigateHome: SplashUiState
+        data class NavigateHome(val user: User): SplashUiState
         data object NavigateOnboarding: SplashUiState
         data object Failed: SplashUiState
     }

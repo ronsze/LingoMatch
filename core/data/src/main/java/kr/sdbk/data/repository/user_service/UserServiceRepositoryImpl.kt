@@ -8,4 +8,6 @@ class UserServiceRepositoryImpl(
     private val dataSource: UserServiceDataSource
 ) : UserServiceRepository {
     override fun getUser(): Flow<FirebaseUser?> = dataSource.getUser()
+    override suspend fun signUp(email: String, password: String): FirebaseUser? = dataSource.signUp(email, password)
+    override suspend fun signIn(email: String, password: String): FirebaseUser? = dataSource.signIn(email, password)
 }

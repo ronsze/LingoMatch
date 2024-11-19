@@ -14,11 +14,12 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kr.sdbk.common.base.TextDialogState
 import kr.sdbk.common.ui.composable.ErrorDialog
+import kr.sdbk.domain.model.user_service.User
 
 @Composable
 fun SplashView(
     navigateToOnboarding: () -> Unit,
-    navigateToHome: () -> Unit,
+    navigateToMain: (User) -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -34,11 +35,11 @@ fun SplashView(
 
     var errorDialogState by remember { mutableStateOf(TextDialogState()) }
 
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     LaunchedEffect(key1 = uiState) {
         when (uiState) {
             SplashViewModel.SplashUiState.Loading -> Unit
-            SplashViewModel.SplashUiState.NavigateHome -> navigateToHome()
+            is SplashViewModel.SplashUiState.NavigateHome -> navigateToMain(uiState.user)
             SplashViewModel.SplashUiState.NavigateOnboarding -> navigateToOnboarding()
             SplashViewModel.SplashUiState.Failed -> errorDialogState = TextDialogState("Error", true)
         }
