@@ -38,8 +38,7 @@ jobs:
 
     - name: Setting Keystore
       run: |
-        echo ${{ secrets.KEYSTORE }} > key.txt
-        base64 -d -o ./app/sdbkz.jks < key.txt
+        echo ${{ secrets.KEYSTORE }} | base64 -d > sdbkz.jks
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
