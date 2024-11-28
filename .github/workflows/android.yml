@@ -30,7 +30,7 @@ jobs:
 
     - name: Setting firebase
       uses: jsdaniell/create-json@v1.2.2
-      with: |
+      with:
         name: "google-services.json"
         json: ${{ secrets.GOOGLE_SERVICES_JSON }}
         dir: 'app/'
