@@ -31,7 +31,7 @@ jobs:
     - name: Setting firebase
       run: |
         echo "${{ secrets.GOOGLE_SERVICES_JSON }}" > ./app/google-services.json
-        cat ./app/google-services.json
+        ls -l ./app/google-services.json  # 파일이 잘 생성되었는지 확인
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
