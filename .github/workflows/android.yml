@@ -38,8 +38,7 @@ jobs:
 
     - name: Setting Keystore
       run: |
-        echo ${{ secrets.KEYSTORE }} > ./app/key.txt
-        base64 -d -i ./app/key.txt > ./app/sdbkz.jks
+        echo ${{ secrets.KEYSTORE }} | base64 --decode > ./app/sdbkz.jks
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -51,4 +50,4 @@ jobs:
       run: ./gradlew test
 
     - name: Clean up secrets files
-      run: rm secrets.properties ./app/google-services.json ./app/key.txt ./app/sdbkz.jks
+      run: rm secrets.properties ./app/google-services.json ./app/sdbkz.jks
