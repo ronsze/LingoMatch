@@ -20,6 +20,12 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
+    - name: Setting Keystore
+      run: |
+        echo ${{ secrets.KEYSTORE }} > ./app/key.b64
+        base64 -d -i ./app/key.b64 > ./app/sdbkz.jks
+
+
     - name: Setting secrets
       run: |
         touch secrets.properties
@@ -35,10 +41,6 @@ jobs:
        name: "google-services.json"
        json: ${{ secrets.GOOGLE_SERVICES_JSON }}
        dir: app/
-
-    - name: Setting Keystore
-      run: |
-        echo ${{ secrets.KEYSTORE }} | base64 -d > sdbkz.jks
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
