@@ -29,11 +29,11 @@ jobs:
         echo "STORE_FILE=${{ secrets.STORE_FILE }}" >> secrets.properties
 
     - name: Setting firebase
-       uses: jsdaniell/create-json@1.1.2
-       with:
-         name: "google-services.json"
-         json: ${{ secrets.GOOGLE_SERVICES_JSON }}
-         dir: app/
+      uses: jsdaniell/create-json@1.1.2
+      with:
+       name: "google-services.json"
+       json: ${{ secrets.GOOGLE_SERVICES_JSON }}
+       dir: app/
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
