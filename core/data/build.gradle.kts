@@ -17,4 +17,7 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
+
+    testImplementation(libs.mockk)
+    testImplementation(libs.robolectric)
 }
