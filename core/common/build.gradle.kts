@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.sdbk.library.compose)
+    id("kotlinx-serialization")
 }
 
 android {
@@ -8,4 +9,9 @@ android {
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }
+}
+
+dependencies {
+    implementation(projects.core.domain)
+    implementation(libs.kotlinx.serialization.json)
 }
