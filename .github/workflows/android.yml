@@ -23,7 +23,7 @@ jobs:
     - name: Setting Keystore
       run: |
        echo "$KEYSTORE" > key.b64
-       base64 -d -i key.b64 > sdbkz.jks
+       base64 -d -i key.b64 > ./app/sdbkz.jks
       env:
        KEYSTORE: ${{ secrets.KEYSTORE }}
 
