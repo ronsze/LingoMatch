@@ -5,6 +5,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import kr.sdbk.main.Main
+import kr.sdbk.main.mainGraph
+import kr.sdbk.sign.Onboarding
+import kr.sdbk.sign.signGraph
 import kr.sdbk.splash.Splash
 import kr.sdbk.splash.splashGraph
 
@@ -18,6 +22,16 @@ fun LingoMatchApp(
         startDestination = Splash,
         modifier = modifier
     ) {
-        splashGraph()
+        splashGraph(
+            navigateToOnboarding = { navHostController.navigate(Onboarding) },
+            navigateToMain = { navHostController.navigate(Main) }
+        )
+
+        signGraph(
+            navController = navHostController,
+            navigateToMain = { navHostController.navigate(Main) }
+        )
+
+        mainGraph()
     }
 }

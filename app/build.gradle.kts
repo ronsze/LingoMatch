@@ -1,9 +1,18 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.sdbk.application.compose)
+    alias(libs.plugins.sdbk.hilt)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    alias(libs.plugins.google.gms)
 }
 
 android {
     namespace = "kr.sdbk.lingomatch"
+
+    val secretProperties = Properties().apply {
+        load(rootProject.file("secrets.properties").inputStream())
+    }
 
     defaultConfig {
         applicationId = "kr.sdbk.lingomatch"
@@ -17,8 +26,27 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = secretProperties.getProperty("KEY_ALIAS")
+            keyPassword = secretProperties.getProperty("KEY_PASSWORD")
+            storeFile = file(secretProperties.getProperty("STORE_FILE"))
+            storePassword = secretProperties.getProperty("STORE_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("release")
+        }
+
+        debug {
+            isDebuggable = true
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -44,4 +72,9 @@ dependencies {
     implementation(projects.core.domain)
 
     implementation(projects.feature.splash)
+    implementation(projects.feature.sign)
+    implementation(projects.feature.main)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 }

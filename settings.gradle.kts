@@ -32,3 +32,5 @@ include(":core:domain")
 
 include(":feature")
 include(":feature:splash")
+include(":feature:sign")
+include(":feature:main")

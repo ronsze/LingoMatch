@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.sdbk.feature)
+    alias(libs.plugins.sdbk.hilt)
 }
 
 android {
@@ -8,14 +9,8 @@ android {
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }
+}
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
+dependencies {
+    implementation(libs.hilt.compose)
 }

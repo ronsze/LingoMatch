@@ -40,9 +40,19 @@ gradlePlugin {
             implementationClass = "kr.sdbk.buildlogic.LibraryComposeConvention"
         }
 
+        register("library") {
+            id = "sdbk.library"
+            implementationClass = "kr.sdbk.buildlogic.LibraryConvention"
+        }
+
         register("featureConvention") {
             id = "sdbk.feature"
             implementationClass = "kr.sdbk.buildlogic.FeatureConvention"
+        }
+
+        register("hiltConvention") {
+            id = "sdbk.hilt"
+            implementationClass = "kr.sdbk.buildlogic.HiltConvention"
         }
     }
 }
