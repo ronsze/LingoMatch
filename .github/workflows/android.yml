@@ -21,10 +21,11 @@ jobs:
         cache: gradle
 
     - name: Setting Keystore
-      run: |
-        echo ${{ secrets.KEYSTORE }} > ./app/key.b64
-        base64 -d -i ./app/key.b64 > ./app/sdbkz.jks
-
+       run: |
+        echo "$KEYSTORE" > KEYSTORE_NAME.b64
+        base64 -d -i KEYSTORE_NAME.b64 > KEYSTORE_NAME.jks
+       env:
+        KEYSTORE: ${{ secrets.KEYSTORE }}
 
     - name: Setting secrets
       run: |
