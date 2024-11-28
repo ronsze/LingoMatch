@@ -20,14 +20,17 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Setting env
+    - name: Setting secrets
       run: |
         touch secrets.properties
         echo "STORE_PASSWORD=${{ secrets.STORE_PASSWORD }}" >> secrets.properties
         echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> secrets.properties
         echo "KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> secrets.properties
         echo "STORE_FILE=${{ secrets.STORE_FILE }}" >> secrets.properties
+
+    - name: Setting firebase
       run: |
+        touch google-services.json
         echo "$GOOGLE_SERVICES_JSON" >> ./app/google-services.json
 
     - name: Grant execute permission for gradlew
