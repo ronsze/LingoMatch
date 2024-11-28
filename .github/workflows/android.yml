@@ -30,8 +30,7 @@ jobs:
 
     - name: Setting firebase
       run: |
-        touch ./app/google-services.json
-        echo "$GOOGLE_SERVICES_JSON" > ./app/google-services.json
+        echo "${{ GOOGLE_SERVICES_JSON }}" > ./app/google-services.json
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
