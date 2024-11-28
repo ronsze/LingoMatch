@@ -24,7 +24,6 @@ class SplashViewModelTest {
     @Test
     fun user_check_error() = runTest {
         every { getUserUseCase() } returns flow { throw Exception() }
-
         viewModel.checkUser()
 
         assert(viewModel.uiState.value is SplashViewModel.SplashUiState.Failed)
@@ -33,7 +32,6 @@ class SplashViewModelTest {
     @Test
     fun user_check_not_founded() = runTest {
         every { getUserUseCase() } returns flow { emit(null) }
-
         viewModel.checkUser()
 
         assert(viewModel.uiState.value is SplashViewModel.SplashUiState.NavigateOnboarding)

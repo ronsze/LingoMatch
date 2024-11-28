@@ -3,7 +3,6 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.sdbk.application.compose)
     alias(libs.plugins.sdbk.hilt)
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     alias(libs.plugins.google.gms)
 }
 

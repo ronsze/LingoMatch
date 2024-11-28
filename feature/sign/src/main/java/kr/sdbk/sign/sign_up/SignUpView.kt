@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.unit.dp
@@ -64,6 +66,7 @@ fun SignUpView(
             label = { BaseText(text = stringResource(id = R.string.password)) },
             value = password,
             onValueChange = { password = it },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             visualTransformation = { TransformedText(AnnotatedString("●".repeat(password.length)), OffsetMapping.Identity) },
             singleLine = true,
             modifier = Modifier
@@ -75,7 +78,8 @@ fun SignUpView(
             label = { BaseText(text = stringResource(id = R.string.confirm_password)) },
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
-            visualTransformation = { TransformedText(AnnotatedString("●".repeat(password.length)), OffsetMapping.Identity) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = { TransformedText(AnnotatedString("●".repeat(confirmPassword.length)), OffsetMapping.Identity) },
             singleLine = true,
             modifier = Modifier
                 .fillMaxWidth()

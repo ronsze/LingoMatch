@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kr.sdbk.main.Main
 import kr.sdbk.main.mainGraph
 import kr.sdbk.sign.Onboarding
@@ -24,12 +26,12 @@ fun LingoMatchApp(
     ) {
         splashGraph(
             navigateToOnboarding = { navHostController.navigate(Onboarding) },
-            navigateToMain = { navHostController.navigate(Main) }
+            navigateToMain = { navHostController.navigate(Main(it)) }
         )
 
         signGraph(
             navController = navHostController,
-            navigateToMain = { navHostController.navigate(Main) }
+            navigateToMain = { navHostController.navigate(Main(it)) }
         )
 
         mainGraph()

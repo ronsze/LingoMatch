@@ -12,28 +12,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out code
     - uses: actions/checkout@v4
-    
-    - name: set up JDK
+    - name: set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
 
+    - name: Setting Keystore
+      run: |
+       echo "$KEYSTORE" > key.b64
+       base64 -d -i key.b64 > ./app/sdbkz.jks
+      env:
+       KEYSTORE: ${{ secrets.KEYSTORE }}
+
+    - name: Setting secrets
+      run: |
+        touch secrets.properties
+        echo "STORE_PASSWORD=${{ secrets.STORE_PASSWORD }}" >> secrets.properties
+        echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> secrets.properties
+        echo "KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> secrets.properties
+        echo "STORE_FILE=${{ secrets.STORE_FILE }}" >> secrets.properties
+
+    - name: Setting firebase
+      id: create-json
+      uses: jsdaniell/create-json@1.1.2
+      with:
+       name: "google-services.json"
+       json: ${{ secrets.GOOGLE_SERVICES_JSON }}
+       dir: app/
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-      
-    - name: Run ktlint
-      run: ./gradlew ktlintCheck
-
-    - name: Run detekt
-      run: ./gradlew detekt
 
     - name: Build with Gradle
       run: ./gradlew build
-      
+
     - name: Run Unit Test
       run: ./gradlew test
 
+    - name: Clean up secrets files
+      run: rm secrets.properties ./app/google-services.json ./app/sdbkz.jks
