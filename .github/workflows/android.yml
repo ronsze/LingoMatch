@@ -12,10 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out code
     - uses: actions/checkout@v4
-    
-    - name: set up JDK
+    - name: set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
@@ -36,4 +34,3 @@ jobs:
       
     - name: Run Unit Test
       run: ./gradlew test
-
