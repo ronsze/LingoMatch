@@ -15,6 +15,7 @@ class FeatureConvention : Plugin<Project> {
 
             dependencies {
                 add("implementation", libs.findLibrary("kotlinx.serialization.json").get())
+                add("implementation", libs.findLibrary("mockk").get())
                 add("implementation", project(":core:common"))
                 add("implementation", project(":core:data"))
                 add("implementation", project(":core:domain"))
