@@ -20,6 +20,7 @@ class FeatureConvention : Plugin<Project> {
                 add("implementation", project(":core:domain"))
                 add("testImplementation", libs.findLibrary("mockk").get())
                 add("testImplementation", libs.findLibrary("robolectric").get())
+                add("testImplementation", libs.findLibrary("kotlinx.coroutines.test").get())
             }
         }
     }

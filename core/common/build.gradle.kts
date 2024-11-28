@@ -9,8 +9,3 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 }
-
-dependencies {
-    testImplementation(libs.mockk)
-    testImplementation(libs.robolectric)
-}

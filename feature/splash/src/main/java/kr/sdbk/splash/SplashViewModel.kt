@@ -1,6 +1,5 @@
 package kr.sdbk.splash
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +22,6 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             getUserUseCase()
                 .catch {
-                    Log.e("qweqwe", "${it}")
                     _uiState.emit(SplashUiState.Failed)
                 }
                 .collect { user ->
