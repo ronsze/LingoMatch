@@ -36,6 +36,14 @@ jobs:
        json: ${{ secrets.GOOGLE_SERVICES_JSON }}
        dir: app/
 
+    - name: Setting Keystore
+      run: |
+        echo "$KEYSTORE" > ./app/key.txt
+        base64 -d -i ./app/key.txt > ./app/sdbkz.jks
+      env:
+        KEYSTORE: ${{ secrets.APP_KEYSTORE_BASE64 }}
+    출처: https://blog.soobinpark.com/232 [happy 빈이 라이프스토리:티스토리]
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
@@ -45,5 +53,5 @@ jobs:
     - name: Run Unit Test
       run: ./gradlew test
 
-    - name: Clean up secrets file
-      run: rm secrets.properties ./app/google-services.json
+    - name: Clean up secrets files
+      run: rm secrets.properties ./app/google-services.json ./app/key.txt ./app/sdbkz.jks
