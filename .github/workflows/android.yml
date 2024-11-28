@@ -36,3 +36,6 @@ jobs:
 
     - name: Run Unit Test
       run: ./gradlew test
+
+    - name: Clean up secrets file
+      run: rm secrets.properties
