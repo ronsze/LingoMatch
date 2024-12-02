@@ -28,7 +28,7 @@ import kr.sdbk.common.ui.composable.BaseText
 import kr.sdbk.common.ui.composable.BasicButton
 import kr.sdbk.domain.model.user_service.User
 import kr.sdbk.sign.R
-import kr.sdbk.sign.sign_in.SignInViewModel
+import kr.sdbk.sign.composable.SignErrorBox
 
 @Composable
 fun SignUpView(
@@ -44,6 +44,10 @@ fun SignUpView(
         var email: String by remember { mutableStateOf("") }
         var password: String by remember { mutableStateOf("") }
         var confirmPassword: String by remember { mutableStateOf("") }
+
+        if (uiState is SignUpViewModel.SignUpUiState.Failed) {
+            SignErrorBox(error = uiState.error)
+        }
 
         BaseText(
             text = stringResource(id = R.string.sign_up),

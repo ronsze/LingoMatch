@@ -1,7 +1,7 @@
 package kr.sdbk.sign
 
 import kotlinx.coroutines.test.runTest
-import kr.sdbk.common.exceptions.InvalidEmailOrPasswordException
+import kr.sdbk.common.exceptions.auth.InvalidEmailOrPasswordException
 import kr.sdbk.common.exceptions.TooManyRequestsException
 import kr.sdbk.sign.sign_in.SignInViewModel
 import org.junit.Before

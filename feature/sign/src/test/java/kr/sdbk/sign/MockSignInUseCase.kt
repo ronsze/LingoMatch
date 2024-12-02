@@ -1,6 +1,6 @@
 package kr.sdbk.sign
 
-import kr.sdbk.common.exceptions.InvalidEmailOrPasswordException
+import kr.sdbk.common.exceptions.auth.InvalidEmailOrPasswordException
 import kr.sdbk.common.exceptions.TooManyRequestsException
 import kr.sdbk.domain.model.user_service.User
 import kr.sdbk.domain.usecase.user_service.SignInUseCase
