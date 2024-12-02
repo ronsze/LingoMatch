@@ -39,9 +39,10 @@ class SplashViewModelTest {
     
     @Test
     fun user_check_founded() = runTest {
-        every { getUserUseCase() } returns flow { emit(User("")) }
+        every { getUserUseCase() } returns flow { emit(User("123")) }
         viewModel.checkUser()
 
         assert(viewModel.uiState.value is SplashViewModel.SplashUiState.NavigateHome)
+        assert((viewModel.uiState.value as SplashViewModel.SplashUiState.NavigateHome).user.uid == "123")
     }
 }

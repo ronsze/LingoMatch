@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import kr.sdbk.common.base.BaseViewModel
 import kr.sdbk.domain.model.user_service.User
 import kr.sdbk.domain.usecase.user_service.SignUpUseCase
+import kr.sdbk.sign.exceptions.PasswordNotMatchedException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,31 +18,28 @@ class SignUpViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<SignUpUiState> = MutableStateFlow(SignUpUiState.UnSigned)
     val uiState get() = _uiState.asStateFlow()
 
-    private val _errorMessage: MutableStateFlow<String> = MutableStateFlow("")
-    val errorMessage get() = _errorMessage.asStateFlow()
-
     fun signUp(
         email: String,
         password: String,
         confirmPassword: String
     ) {
         if (password != confirmPassword) {
-            _errorMessage.set("Passwords not matched")
+            _uiState.set(SignUpUiState.Failed(PasswordNotMatchedException()))
         } else {
             viewModelScope.launch {
                 try {
                     val user = signUpUseCase(email, password)
                     _uiState.set(SignUpUiState.Signed(user))
                 } catch (e: Exception) {
-                    _errorMessage.set(e.message.toString())
+                    _uiState.set(SignUpUiState.Failed(e))
                 }
             }
-
         }
     }
 
     sealed interface SignUpUiState {
         data object UnSigned: SignUpUiState
         data class Signed(val user: User): SignUpUiState
+        data class Failed(val error: Exception): SignUpUiState
     }
 }

@@ -18,7 +18,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,6 +26,7 @@ import kr.sdbk.common.ui.composable.BaseText
 import kr.sdbk.common.ui.composable.BasicButton
 import kr.sdbk.domain.model.user_service.User
 import kr.sdbk.sign.R
+import kr.sdbk.sign.composable.SignErrorBox
 
 @Composable
 fun SignInView(
@@ -40,6 +40,10 @@ fun SignInView(
         val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
         var email: String by remember { mutableStateOf("") }
         var password: String by remember { mutableStateOf("") }
+
+        if (uiState is SignInViewModel.SignInUiState.Failed) {
+            SignErrorBox(error = uiState.error)
+        }
 
         BaseText(
             text = stringResource(id = R.string.sign_in),

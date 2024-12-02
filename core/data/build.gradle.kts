@@ -13,6 +13,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.common)
     implementation(projects.core.domain)
 
     implementation(platform(libs.firebase.bom))
