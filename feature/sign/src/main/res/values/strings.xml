@@ -8,4 +8,7 @@
     <string name="confirm_password">confirm password</string>
 
     <string name="confirm">confirm</string>
+
+    <string name="invalid_email_or_password">Invalid Email or Password</string>
+    <string name="too_many_requests">Too Many Requests, please try again later</string>
 </resources>
