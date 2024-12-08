@@ -1,5 +1,6 @@
 package kr.sdbk.sign
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import kr.sdbk.common.exceptions.auth.InvalidEmailOrPasswordException
 import kr.sdbk.common.exceptions.TooManyRequestsException
@@ -16,7 +17,7 @@ class SignInViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = SignInViewModel(signInUseCase)
+        viewModel = SignInViewModel(Dispatchers.IO, signInUseCase)
     }
 
     @Test
