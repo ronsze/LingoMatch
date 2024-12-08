@@ -13,7 +13,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kr.sdbk.common.base.TextDialogState
-import kr.sdbk.common.ui.composable.ErrorDialog
+import kr.sdbk.common.ui.composable.dialog.ErrorDialog
 import kr.sdbk.domain.model.user_service.User
 
 @Composable

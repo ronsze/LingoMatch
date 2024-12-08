@@ -1,10 +1,12 @@
 package kr.sdbk.sign
 
+import kotlinx.coroutines.Dispatchers
 import kr.sdbk.common.exceptions.auth.EmailExistsException
 import kr.sdbk.common.exceptions.auth.InvalidEmailFormatException
 import kr.sdbk.common.exceptions.auth.WeakPasswordException
 import kr.sdbk.sign.exceptions.PasswordNotMatchedException
 import kr.sdbk.sign.sign_up.SignUpViewModel
+import net.bytebuddy.build.Plugin.Engine.Dispatcher
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +19,7 @@ class SignUpViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = SignUpViewModel(signUpUseCase)
+        viewModel = SignUpViewModel(Dispatchers.IO, signUpUseCase)
     }
 
     @Test
