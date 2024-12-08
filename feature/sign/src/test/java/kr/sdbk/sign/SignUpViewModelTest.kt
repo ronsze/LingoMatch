@@ -1,12 +1,14 @@
 package kr.sdbk.sign
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.setMain
 import kr.sdbk.common.exceptions.auth.EmailExistsException
 import kr.sdbk.common.exceptions.auth.InvalidEmailFormatException
 import kr.sdbk.common.exceptions.auth.WeakPasswordException
 import kr.sdbk.sign.exceptions.PasswordNotMatchedException
 import kr.sdbk.sign.sign_up.SignUpViewModel
-import net.bytebuddy.build.Plugin.Engine.Dispatcher
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,9 +19,12 @@ class SignUpViewModelTest {
     private lateinit var viewModel: SignUpViewModel
     private val signUpUseCase = MockSignUpUseCase()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setup() {
-        viewModel = SignUpViewModel(Dispatchers.IO, signUpUseCase)
+        val testDispatcher = UnconfinedTestDispatcher()
+        Dispatchers.setMain(testDispatcher)
+        viewModel = SignUpViewModel(testDispatcher, signUpUseCase)
     }
 
     @Test
