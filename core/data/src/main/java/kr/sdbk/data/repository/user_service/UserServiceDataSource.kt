@@ -16,6 +16,7 @@ import kr.sdbk.common.exceptions.auth.EmailExistsException
 import kr.sdbk.common.exceptions.auth.InvalidEmailFormatException
 import kr.sdbk.common.exceptions.auth.InvalidEmailOrPasswordException
 import kr.sdbk.common.exceptions.auth.WeakPasswordException
+import kr.sdbk.domain.model.user_service.Profile
 
 class UserServiceDataSource : UserServiceRepository {
     override fun getUser(): Flow<FirebaseUser?> = flow {
@@ -50,6 +51,13 @@ class UserServiceDataSource : UserServiceRepository {
                 else -> e
             }
         }
+    }
 
+    override suspend fun postProfile(profile: Profile) {
+
+    }
+
+    override suspend fun getProfile(): Profile {
+        return Profile("", 1, 1)
     }
 }
