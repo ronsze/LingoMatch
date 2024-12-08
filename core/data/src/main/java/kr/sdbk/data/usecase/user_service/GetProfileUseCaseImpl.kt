@@ -7,5 +7,5 @@ import kr.sdbk.domain.usecase.user_service.GetProfileUseCase
 class GetProfileUseCaseImpl(
     private val repository: UserServiceRepository
 ) : GetProfileUseCase {
-    override suspend fun invoke(uid: String): Profile = repository.getProfile(uid)
+    override suspend fun invoke(): Profile = repository.getProfile()
 }
