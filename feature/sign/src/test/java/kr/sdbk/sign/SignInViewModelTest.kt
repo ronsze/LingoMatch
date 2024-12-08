@@ -1,8 +1,13 @@
 package kr.sdbk.sign
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
-import kr.sdbk.common.exceptions.auth.InvalidEmailOrPasswordException
+import kotlinx.coroutines.test.setMain
 import kr.sdbk.common.exceptions.TooManyRequestsException
+import kr.sdbk.common.exceptions.auth.InvalidEmailOrPasswordException
 import kr.sdbk.sign.sign_in.SignInViewModel
 import org.junit.Before
 import org.junit.Test
@@ -14,9 +19,12 @@ class SignInViewModelTest {
     private lateinit var viewModel: SignInViewModel
     private val signInUseCase = MockSignInUseCase()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setup() {
-        viewModel = SignInViewModel(signInUseCase)
+        val testDispatcher = UnconfinedTestDispatcher()
+        Dispatchers.setMain(testDispatcher)
+        viewModel = SignInViewModel(testDispatcher, signInUseCase)
     }
 
     @Test

@@ -2,8 +2,12 @@ package kr.sdbk.splash
 
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import kr.sdbk.domain.model.user_service.User
 import kr.sdbk.domain.usecase.user_service.GetUserUseCase
 import org.junit.Before
@@ -16,9 +20,12 @@ class SplashViewModelTest {
     private val getUserUseCase = mockk<GetUserUseCase>()
     private lateinit var viewModel: SplashViewModel
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setup() {
-        viewModel = SplashViewModel(getUserUseCase)
+        val testDispatcher = UnconfinedTestDispatcher()
+        Dispatchers.setMain(testDispatcher)
+        viewModel = SplashViewModel(testDispatcher, getUserUseCase)
     }
 
     @Test

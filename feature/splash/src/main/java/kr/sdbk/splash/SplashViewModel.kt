@@ -2,17 +2,21 @@ package kr.sdbk.splash
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kr.sdbk.common.base.BaseViewModel
+import kr.sdbk.data.di.IoDispatcher
 import kr.sdbk.domain.model.user_service.User
 import kr.sdbk.domain.usecase.user_service.GetUserUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     private val getUserUseCase: GetUserUseCase
 ) : BaseViewModel() {
     private val _uiState = MutableStateFlow<SplashUiState>(SplashUiState.Loading)
@@ -21,6 +25,7 @@ class SplashViewModel @Inject constructor(
     fun checkUser() {
         viewModelScope.launch {
             getUserUseCase()
+                .flowOn(ioDispatcher)
                 .catch {
                     _uiState.emit(SplashUiState.Failed)
                 }
